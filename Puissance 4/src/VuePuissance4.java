@@ -1,5 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.net.URL;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,10 +37,12 @@ public class VuePuissance4 extends JPanel{
 		JPanel centre = new JPanel(new GridLayout(7,6));
 		// création du plateau de jeu 
 		this.plateau = new JButton[LIGNE][COLONNE];
+		URL casseImg = getClass().getResource("/CaseRouge.png");
+		Icon casseVide = new ImageIcon(casseImg);
 		for(int i= 0; i < LIGNE ; i++){
 			for(int j= 0; j < COLONNE; j++){
-				this.plateau[i][j] = new JButton("");
-				this.plateau[i][j].setEnabled(false);
+				this.plateau[i][j] = new JButton(casseVide);
+				this.plateau[i][j].setEnabled(true);
 				//this.plateau[i][j].addActionListener(controler);
 				//On l'ajoute dans le JPanel central
 				centre.add(this.plateau[i][j]);
@@ -57,6 +63,5 @@ public class VuePuissance4 extends JPanel{
 		sud.add(etatPartie);
 		this.add(sud,BorderLayout.SOUTH);	
 		
-	}
-	
+	}	
 }

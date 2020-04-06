@@ -10,7 +10,7 @@ public class Main {
 			f.add(new VuePuissance4());
 			f.pack();
 			f.setVisible(true);
-			f.setSize(680, 480);
+			f.setSize(630,680);
 			f.setTitle("Puissance 4");
 			
 	}
