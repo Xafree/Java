@@ -37,12 +37,12 @@ public class VuePuissance4 extends JPanel{
 		JPanel centre = new JPanel(new GridLayout(7,6));
 		// création du plateau de jeu 
 		this.plateau = new JButton[LIGNE][COLONNE];
-		URL casseImg = getClass().getResource("/CaseRouge.png");
+		URL casseImg = getClass().getResource("/Case.png");
 		Icon casseVide = new ImageIcon(casseImg);
 		for(int i= 0; i < LIGNE ; i++){
 			for(int j= 0; j < COLONNE; j++){
 				this.plateau[i][j] = new JButton(casseVide);
-				this.plateau[i][j].setEnabled(true);
+				//this.plateau[i][j].setEnabled(false);
 				//this.plateau[i][j].addActionListener(controler);
 				//On l'ajoute dans le JPanel central
 				centre.add(this.plateau[i][j]);
