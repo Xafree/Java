@@ -8,7 +8,7 @@ public class ModelPuissance4 {
 	 private EtatPuissance4[][] plateau;
 	 
 	 public ModelPuissance4() {
-		 plateau = new EtatPuissance4[LIGNE][COLONNE];
+		 this.plateau = new EtatPuissance4[LIGNE][COLONNE];
 		 this.viderPlateau();
 	 }
 	 
@@ -50,35 +50,25 @@ public class ModelPuissance4 {
 
 	 }
 	 
-	 public boolean PartieGagner(EtatPuissance4 joueur) {
-		 for (int x=0; x < COLONNE; x++){
-				for (int y=0; y< LIGNE; y++){
-								//-----------------------Vérification de la Colonne-------------------------------
-					if(plateau[x][y]==plateau[x][y+1] && plateau[x][y]==plateau[x][y+2] && plateau[x][y]==plateau[x][y+3] && plateau[x][y]== joueur){
-						return true;			
-					}
-								//-----------------------Vérification de la ligne---------------------------------
-					if(plateau[x][y]==plateau[x+1][y] && plateau[x][y]==plateau[x+2][y] && plateau[x][y]==plateau[x+3][y] && plateau[x][y]== joueur){
-						return true;
-					}
-								//------------------Vérification de la diagonale joueur---------------------------
-					if(plateau[x][y]==plateau[x+1][y+1] && plateau[x][y]==plateau[x+2][y+2] && plateau[x][y]==plateau[x+3][y+3]  && plateau[x][y] == joueur){
-						return true;
-					}
-					if(plateau[x][y]==plateau[x-1][y-1] && plateau[x][y]==plateau[x-2][y-2] && plateau[x][y]==plateau[x-3][y-3]  && plateau[x][y] == joueur){
-						return true;
-					}
-					if(plateau[x][y]==plateau[x-1][y+1] && plateau[x][y]==plateau[x-2][y+2] && plateau[x][y]==plateau[x-3][y+3] && plateau[x][y]  == joueur){
-						return true;
-					}
-					if(plateau[x][y]==plateau[x+1][y-1] && plateau[x][y]==plateau[x+2][y-2] && plateau[x][y]==plateau[x+3][y-3] && plateau[x][y]  == joueur){
-						return true;
-					}
+	 public boolean PartieGagner() {
+		 return verifLigne();
+		}
+		
+	 public boolean verifLigne() {
+		 boolean verif = false;
+		 for (int x=0; x < LIGNE ; x++){
+			for (int y=0; y < COLONNE ; y++){
+				if(x+3 > LIGNE || x+2 > LIGNE || x+1 > LIGNE ) {
+					if((this.plateau[x][y]==this.plateau[x+1][y])&&
+							(this.plateau[x][y]==this.plateau[x+2][y])&&
+							(this.plateau[x][y]==this.plateau[x+3][y])&&
+							(this.plateau[x][y]!=EtatPuissance4.CASEVIDE))
+							verif = true;
 				}
 			}
-		 return false;
+		 }
+		 return verif;
 	 }
-		
 	 public void setCase(EtatPuissance4 etat, int ligne, int colonne) {
 			this.plateau[ligne][colonne] = etat;		
 	}
@@ -98,7 +88,7 @@ public class ModelPuissance4 {
 	
 }
 /**
-//retourne true si puissance 4 trouvé dans la grille
+//retourne true si puissance 4 trouvé dans la this.plateau
 	public static boolean verif()
 	{
 		boolean aligne=false;
@@ -116,10 +106,10 @@ public class ModelPuissance4 {
 		{
 			for(co=0;co<8;co++)
 			{
-				if((grille[li][co]==grille[li+1][co+1])&&
-				   (grille[li][co]==grille[li+2][co+2])&&
-				   (grille[li][co]==grille[li+3][co+3])&&
-				   (grille[li][co]!="_"))
+				if((this.plateau[li][co]==this.plateau[li+1][co+1])&&
+				   (this.plateau[li][co]==this.plateau[li+2][co+2])&&
+				   (this.plateau[li][co]==this.plateau[li+3][co+3])&&
+				   (this.plateau[li][co]!="_"))
 					align=true;
 			}
 		}
@@ -135,10 +125,10 @@ public class ModelPuissance4 {
 		{
 			for(co=3;co<11;co++)
 			{
-				if((grille[li][co]==grille[li+1][co-1])&&
-				   (grille[li][co]==grille[li+2][co-2])&&
-				   (grille[li][co]==grille[li+3][co-3])&&
-				   (grille[li][co]!="_"))
+				if((this.plateau[li][co]==this.plateau[li+1][co-1])&&
+				   (this.plateau[li][co]==this.plateau[li+2][co-2])&&
+				   (this.plateau[li][co]==this.plateau[li+3][co-3])&&
+				   (this.plateau[li][co]!="_"))
 					align=true;
 			}
 		}
@@ -154,10 +144,10 @@ public class ModelPuissance4 {
 		{
 			for(co=0;co<11;co++)
 			{
-				if((grille[li][co]==grille[li+1][co])&&
-				   (grille[li][co]==grille[li+2][co])&&
-				   (grille[li][co]==grille[li+3][co])&&
-				   (grille[li][co]!="_"))
+				if((this.plateau[li][co]==this.plateau[li+1][co])&&
+				   (this.plateau[li][co]==this.plateau[li+2][co])&&
+				   (this.plateau[li][co]==this.plateau[li+3][co])&&
+				   (this.plateau[li][co]!="_"))
 					align=true;
 			}
 		}
@@ -173,14 +163,63 @@ public class ModelPuissance4 {
 		{
 			for(co=0;co<8;co++)
 			{
-				if((grille[li][co]==grille[li][co+1])&&
-				   (grille[li][co]==grille[li][co+2])&&
-				   (grille[li][co]==grille[li][co+3])&&
-				   (grille[li][co]!="_"))
+				if((this.plateau[li][co]==this.plateau[li][co+1])&&
+				   (this.plateau[li][co]==this.plateau[li][co+2])&&
+				   (this.plateau[li][co]==this.plateau[li][co+3])&&
+				   (this.plateau[li][co]!="_"))
 					align=true;
 			}
 		}
 		return(align);
 	}
+	
+	
+	
+	
+	
 
+			
+			
+			 public boolean verDiagDroit(){
+			boolean align=false;
+			for( int li=0;li<4;li++){
+				for(int co=0;co<8;co++){
+					if((this.plateau[li][co]==this.plateau[li+1][co+1])&&
+					   (this.plateau[li][co]==this.plateau[li+2][co+2])&&
+					   (this.plateau[li][co]==this.plateau[li+3][co+3])&&
+					   (this.plateau[li][co] != EtatPuissance4.CASEVIDE))
+						align=true;
+				}
+			}
+			return(align);
+		}
+
+	public boolean verDiagGauch(){
+			boolean align=false;
+			for( int li=0;li<4;li++){
+				for(int co=3;co<11;co++){
+					if((this.plateau[li][co]==this.plateau[li+1][co-1])&&
+					   (this.plateau[li][co]==this.plateau[li+2][co-2])&&
+					   (this.plateau[li][co]==this.plateau[li+3][co-3])&&
+					   (this.plateau[li][co]!= EtatPuissance4.CASEVIDE))
+						align=true;
+				}
+			}
+			return(align);
+		}
+		
+		
+				public boolean verVertic(){
+			boolean align=false;
+			for( int li=0;li<4;li++){
+				for(int co=0;co<11;co++){
+					if((this.plateau[li][co]==this.plateau[li+1][co])&&
+					   (this.plateau[li][co]==this.plateau[li+2][co])&&
+					   (this.plateau[li][co]==this.plateau[li+3][co])&&
+					   (this.plateau[li][co]!= EtatPuissance4.CASEVIDE))
+						align=true;
+				}
+			}
+			return(align);
+		}
 */

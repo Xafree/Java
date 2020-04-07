@@ -37,7 +37,7 @@ public class ControleurPuissance4 implements ActionListener {
 				
 				System.out.println("Colonne : "+sourcePlacement.getIndexI());
 				System.out.println("ligne   : "+modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexJ()));
-				System.out.println("Nombre de place libre : "+modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexJ())+"\n");
+				System.out.println("Nombre jeton dans la colonne : "+modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexJ())+"\n");
 				
 				if(modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexI()) == 0) {
 					int colonne = sourcePlacement.getIndexI()+1;
@@ -46,7 +46,7 @@ public class ControleurPuissance4 implements ActionListener {
 					modele.placerPion(sourcePlacement.getIndexI(),EtatPuissance4.JOUEUR1);
 					vue.setIconPlateau(modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexI()),sourcePlacement.getIndexI(),JetonJaune);
 				}
-
+				System.out.println(modele.PartieGagner());
 				vue.setJoueurCourant("Joueur 2 à vous de jouer !");
 				System.out.println(modele.toString());
 				break;
@@ -64,7 +64,7 @@ public class ControleurPuissance4 implements ActionListener {
 					modele.placerPion(sourcePlacement.getIndexI(),EtatPuissance4.JOUEUR2);
 					vue.setIconPlateau(modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexI()),sourcePlacement.getIndexI(),JetonRouge);
 				}
-
+				System.out.println(modele.PartieGagner());
 				vue.setJoueurCourant("Joueur 1 à vous de jouer !");
 				System.out.println(modele.toString());
 				break;
