@@ -51,14 +51,14 @@ public class ModelPuissance4 {
 	 }
 	 
 	 public boolean PartieGagner() {
-		 return verifLigne();
+		 return verifLigne() || this.verifColonne()|| verifDiagDroit() || verifDiagGauche();
 		}
 		
 	 public boolean verifLigne() {
 		 boolean verif = false;
-		 for (int x=0; x < LIGNE ; x++){
+		 for (int x=0; x < LIGNE  ; x++){
 			for (int y=0; y < COLONNE ; y++){
-				if(x+3 > LIGNE || x+2 > LIGNE || x+1 > LIGNE ) {
+				if( x < LIGNE-3) {
 					if((this.plateau[x][y]==this.plateau[x+1][y])&&
 							(this.plateau[x][y]==this.plateau[x+2][y])&&
 							(this.plateau[x][y]==this.plateau[x+3][y])&&
@@ -68,6 +68,54 @@ public class ModelPuissance4 {
 			}
 		 }
 		 return verif;
+	 }
+	 
+	 public boolean verifColonne() {
+		 boolean verif = false;
+		 for (int i=0; i < LIGNE  ; i++){
+			for (int y=0; y < COLONNE ; y++){
+				if( y < COLONNE-3) {
+					if((this.plateau[i][y]==this.plateau[i][y+1])&&
+							(this.plateau[i][y]==this.plateau[i][y+2])&&
+							(this.plateau[i][y]==this.plateau[i][y+3])&&
+							(this.plateau[i][y]!=EtatPuissance4.CASEVIDE))
+							verif = true;
+				}
+			}
+		 }
+		 return verif;
+	 }
+	 
+	 public boolean verifDiagDroit() {
+			boolean verif = false;
+			for(int i=0 ; i < LIGNE ; i++){
+				for(int y=0 ; y<COLONNE ;y ++){
+					if( y < COLONNE-3 && i < LIGNE-3) {
+						if((this.plateau[i][y]==this.plateau[i+1][y+1])&&
+							(this.plateau[i][y]==this.plateau[i+2][y+2])&&
+							(this.plateau[i][y]==this.plateau[i+3][y+3])&&
+							(this.plateau[i][y]!=EtatPuissance4.CASEVIDE))
+							verif=true;
+					}
+				}
+			}
+			return verif;
+	 }
+	 
+	 public boolean verifDiagGauche() {
+			boolean verif = false;
+			for(int i=0 ; i < LIGNE ; i++){
+				for(int y=0 ; y<COLONNE ;y ++){
+					if( y < COLONNE-3 && i < LIGNE-3) {
+						if((this.plateau[i][y]==this.plateau[i+1][y-1])&&
+							(this.plateau[i][y]==this.plateau[i+2][y-2])&&
+							(this.plateau[i][y]==this.plateau[i+3][y-3])&&
+							(this.plateau[i][y]!=EtatPuissance4.CASEVIDE))
+							verif=true;
+					}
+				}
+			}
+			return verif;
 	 }
 	 public void setCase(EtatPuissance4 etat, int ligne, int colonne) {
 			this.plateau[ligne][colonne] = etat;		
