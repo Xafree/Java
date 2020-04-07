@@ -102,4 +102,9 @@ public class VuePuissance4 extends JPanel{
 			}
 	 }
 		
+	public void bloquerBouton() {
+		for(int i  = 0 ; i < COLONNE ; i++) {
+			this.tableauActions[i].setEnabled(false);
+		}
+	}
 }

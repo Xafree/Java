@@ -46,9 +46,15 @@ public class ControleurPuissance4 implements ActionListener {
 					modele.placerPion(sourcePlacement.getIndexI(),EtatPuissance4.JOUEUR1);
 					vue.setIconPlateau(modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexI()),sourcePlacement.getIndexI(),JetonJaune);
 				}
-				System.out.println(modele.PartieGagner());
-				vue.setJoueurCourant("Joueur 2 à vous de jouer !");
+				
+				if(modele.PartieGagner()){
+					vue.bloquerBouton();
+					vue.setAvancerPartie("Joueur 1 vous avez gagner la partie !");
+				}else {
+					vue.setJoueurCourant("Joueur 2 à vous de jouer !");
+				}
 				System.out.println(modele.toString());
+				
 				break;
 			case JOUEUR2:
 				etatPartie = EtatPuissance4.JOUEUR1;
@@ -64,14 +70,18 @@ public class ControleurPuissance4 implements ActionListener {
 					modele.placerPion(sourcePlacement.getIndexI(),EtatPuissance4.JOUEUR2);
 					vue.setIconPlateau(modele.nbJetonPlacerDansColonnes(sourcePlacement.getIndexI()),sourcePlacement.getIndexI(),JetonRouge);
 				}
-				System.out.println(modele.PartieGagner());
-				vue.setJoueurCourant("Joueur 1 à vous de jouer !");
+				
+				if(modele.PartieGagner()) {
+					vue.bloquerBouton();
+					vue.setAvancerPartie("Joueur 1 vous avez gagner la partie !");
+				}else {
+					vue.setJoueurCourant("Joueur 1 à vous de jouer !");
+				}
 				System.out.println(modele.toString());
 				break;
 			default:
 				break;				
 			}
-		
 		}else {
 			modele.viderPlateau();
 			vue.resetPlateau();
