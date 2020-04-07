@@ -51,7 +51,7 @@ public class ModelPuissance4 {
 	 }
 	 
 	 public boolean PartieGagner() {
-		 return verifLigne() || this.verifColonne()|| verifDiagDroit() || verifDiagGauche();
+		 return verifLigne() || this.verifColonne()|| verifDiagDroit()|| verifDiagGauche();
 		}
 		
 	 public boolean verifLigne() {
@@ -106,8 +106,8 @@ public class ModelPuissance4 {
 			boolean verif = false;
 			for(int i=0 ; i < LIGNE ; i++){
 				for(int y=0 ; y<COLONNE ;y ++){
-					if( y < COLONNE-3 && i < LIGNE-3) {
-						if((this.plateau[i][y]==this.plateau[i+1][y-1])&&
+					if( y > 3 && i < LIGNE-3){
+						if( (this.plateau[i][y]==this.plateau[i+1][y-1])&&
 							(this.plateau[i][y]==this.plateau[i+2][y-2])&&
 							(this.plateau[i][y]==this.plateau[i+3][y-3])&&
 							(this.plateau[i][y]!=EtatPuissance4.CASEVIDE))
@@ -117,6 +117,7 @@ public class ModelPuissance4 {
 			}
 			return verif;
 	 }
+	 
 	 public void setCase(EtatPuissance4 etat, int ligne, int colonne) {
 			this.plateau[ligne][colonne] = etat;		
 	}
@@ -124,8 +125,8 @@ public class ModelPuissance4 {
 
 		public String toString() {
 			StringBuffer res = new StringBuffer();
-			for(int i = 0; i < LIGNE; i++) {
-				for(int y = 0; y < COLONNE; y++) {
+			for(int i = 0; i < LIGNE ; i++) {
+				for(int y = 0; y < COLONNE ; y++) {
 					res.append(this.plateau[i][y]);
 					res.append(" ");
 				}
@@ -135,6 +136,7 @@ public class ModelPuissance4 {
 		}
 	
 }
+
 /**
 //retourne true si puissance 4 trouvé dans la this.plateau
 	public static boolean verif()
