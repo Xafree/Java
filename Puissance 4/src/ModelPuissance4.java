@@ -21,8 +21,8 @@ public class ModelPuissance4 {
 	 }
 	 
 	 /**
-	  * Utilise le La ligne i pour déduire combien de place libre il reste dans la colonne
-	  * @param La ligne
+	  * Utilise la colonne i pour savoir combien il reste de place libre (pour savoir combien on a placer de jeton dans 1 colonne)
+	  * @param Colonne i
 	  * @return Nombre de place libre
 	  */
 	 public int nbJetonPlacerDansColonnes(int i){
@@ -48,6 +48,19 @@ public class ModelPuissance4 {
 		  }
 		 
 
+	 }
+	 /**
+	  * Renvoie vrai si tout les colonnes du tableau sont remplis
+	  * @return isFullColumn
+	  */
+	 public boolean egalite() {
+		 int isFullColumn = 0;
+			for (int y=0; y < COLONNE ; y++){
+				if(this.nbJetonPlacerDansColonnes(y) == 0){
+					isFullColumn ++;
+				}
+			}
+		 return (isFullColumn == COLONNE);
 	 }
 	 
 	 public boolean PartieGagner() {

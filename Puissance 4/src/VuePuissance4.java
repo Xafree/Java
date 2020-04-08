@@ -30,7 +30,7 @@ public class VuePuissance4 extends JPanel{
 		JButton recommencer = new JButton("Recommencer");
 		recommencer.addActionListener(controler);
 		joueurCourant = new JLabel("Joueur 1");
-		nbTour = new JLabel("Tour 1");
+		nbTour = new JLabel("Score : ");
 		
 		
 		// Ajout des éléments dans le dans les Différent Panel
@@ -102,9 +102,15 @@ public class VuePuissance4 extends JPanel{
 			}
 	 }
 		
-	public void bloquerBouton() {
+	public void lockButton() {
 		for(int i  = 0 ; i < COLONNE ; i++) {
 			this.tableauActions[i].setEnabled(false);
+		}
+	}
+	
+	public void unlockButton(){
+		for(int i  = 0 ; i < COLONNE ; i++) {
+			this.tableauActions[i].setEnabled(true);
 		}
 	}
 }
