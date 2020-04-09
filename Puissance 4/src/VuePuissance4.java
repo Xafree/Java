@@ -1,7 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.net.URL;
+import java.util.TimerTask;
 
+import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,7 +15,7 @@ public class VuePuissance4 extends JPanel{
 	 public static  int LIGNE = 6; 								// Ligne MAX du plateau
 	 public static  int COLONNE = 7; 							// Colonne MAX du plateau
 	 private JLabel joueurCourant; 								// JLabel qui prend le tour du joueur
-	 private JLabel nbTour;										// Variable qui récupère le nombre de tour
+	 private JLabel score;										// Variable qui récupère le nombre de tour
 	 private JLabel avancerPartie;								// Indique l'état du jeu (ex : le nom du vainceur/ colonne pleinne)
 	 private JButtonPlateauPuissance4[][]plateau; 				// Plateau du jeu
 	 private JButtonPlateauPuissance4[]tableauActions;  		// Tableau qui va nous servir a choisir la colonne dans laquel on va placer le pion
@@ -30,12 +32,12 @@ public class VuePuissance4 extends JPanel{
 		JButton recommencer = new JButton("Recommencer");
 		recommencer.addActionListener(controler);
 		joueurCourant = new JLabel("Joueur 1");
-		nbTour = new JLabel("Score : ");
+		score = new JLabel("Joueur 1 : 0 | Joueur 2 : 0");
 		
 		
 		// Ajout des éléments dans le dans les Différent Panel
 		nord.add(recommencer);
-		nord.add(nbTour);
+		nord.add(score);
 		nord.add(joueurCourant);
 		this.add(nord,BorderLayout.NORTH);
 		
@@ -55,7 +57,7 @@ public class VuePuissance4 extends JPanel{
 		}
 		
 		// Création des bouton de selection
-		this.tableauActions = new JButtonPlateauPuissance4[COLONNE];
+		this.tableauActions = new JButtonPlateauPuissance4[COLONNE+1];
 		for(int i  = 0 ; i < COLONNE ; i++) {
 			this.tableauActions[i]= new JButtonPlateauPuissance4(i,0);
 			this.tableauActions[i].addActionListener(controler);
@@ -70,14 +72,30 @@ public class VuePuissance4 extends JPanel{
 		
 		//JLabel de création de gagnant
 		this.avancerPartie = new JLabel("Partie en cour !");
-		
+		this.tableauActions[COLONNE]= new JButtonPlateauPuissance4(COLONNE,0);
+		this.tableauActions[COLONNE].addActionListener(controler);
 		// Ajout des différents élément dans les Différents panel 
+		sud.add(this.tableauActions[COLONNE]);
 		sud.add(avancerPartie);
 		this.add(sud,BorderLayout.SOUTH);	
 		
 	}
 	
-	public void setIconPlateau(int ligne, int colonne, Icon icon ) {
+	public void deplacerJetons(int column) {
+		Icon caseVide = new ImageIcon(caseImg);
+		int restriction = 0;
+		for(int i = 5 ; i > restriction-1 ; i--) {
+			if(i == 0) {
+				this.setIconPlateau(0, column,caseVide);
+			}else {
+				this.setIconPlateau(i, column,this.plateau[i-1][column].getIcon());
+			}
+		}
+	}
+	
+
+	
+	public void setIconPlateau(int ligne, int colonne, Icon icon ){
 		this.plateau[ligne][colonne].setIcon(icon);
 	}
 
@@ -85,8 +103,8 @@ public class VuePuissance4 extends JPanel{
 		this.joueurCourant.setText(joueurCourant);
 	}
 
-	public void setNbTour(String nbTour) {
-		this.nbTour.setText(nbTour);
+	public void setScore(String score) {
+		this.score.setText(score);
 	}
 
 	public void setAvancerPartie(String texte) {
@@ -106,6 +124,14 @@ public class VuePuissance4 extends JPanel{
 		for(int i  = 0 ; i < COLONNE ; i++) {
 			this.tableauActions[i].setEnabled(false);
 		}
+	}
+	
+	public void lockUnBouton(int i) {
+		this.tableauActions[i].setEnabled(false);
+	}
+	
+	public void unLockUnBouton(int i) {
+		this.tableauActions[i].setEnabled(true);
 	}
 	
 	public void unlockButton(){
