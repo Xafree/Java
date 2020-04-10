@@ -12,14 +12,15 @@ import javax.swing.JPanel;
 
 public class VuePuissance4 extends JPanel{
 	
-	 public static  int LIGNE = 6; 								// Ligne MAX du plateau
-	 public static  int COLONNE = 7; 							// Colonne MAX du plateau
-	 private JLabel joueurCourant; 								// JLabel qui prend le tour du joueur
-	 private JLabel score;										// Variable qui récupère le nombre de tour
-	 private JLabel avancerPartie;								// Indique l'état du jeu (ex : le nom du vainceur/ colonne pleinne)
-	 private JButtonPlateauPuissance4[][]plateau; 				// Plateau du jeu
-	 private JButtonPlateauPuissance4[]tableauActions;  		// Tableau qui va nous servir a choisir la colonne dans laquel on va placer le pion
-	 URL caseImg = getClass().getResource("/Images/Case.png");  // URL de l'icon utiliser
+	 public static  int LIGNE = 6; 											// Ligne MAX du plateau
+	 public static  int COLONNE = 7; 										// Colonne MAX du plateau
+	 private JLabel joueurCourant; 											// JLabel qui prend le tour du joueur
+	 private JLabel score;													// Variable qui récupère le nombre de tour
+	 private JLabel avancerPartie;											// Indique l'état du jeu (ex : le nom du vainceur/ colonne pleinne)
+	 private JButtonPlateauPuissance4[][]plateau; 							// Plateau du jeu
+	 private JButtonPlateauPuissance4[]tableauActions;  					// Tableau qui va nous servir a choisir la colonne dans laquel on va placer le pion
+	 URL caseImg = getClass().getResource("/Images/Case.png");  			// URL de l'icon utiliser
+	 URL croisRouge = getClass().getResource("/Images/croix_rouge.png");  	// URL de l'icon croix rouge
 	 
 
 	public VuePuissance4(){
@@ -72,7 +73,8 @@ public class VuePuissance4 extends JPanel{
 		
 		//JLabel de création de gagnant
 		this.avancerPartie = new JLabel("Partie en cour !");
-		this.tableauActions[COLONNE]= new JButtonPlateauPuissance4(COLONNE,0);
+		Icon croix_rouge = new ImageIcon(croisRouge);
+		this.tableauActions[COLONNE]= new JButtonPlateauPuissance4(COLONNE,0);	
 		this.tableauActions[COLONNE].addActionListener(controler);
 		// Ajout des différents élément dans les Différents panel 
 		sud.add(this.tableauActions[COLONNE]);
@@ -98,7 +100,7 @@ public class VuePuissance4 extends JPanel{
 	public void setIconPlateau(int ligne, int colonne, Icon icon ){
 		this.plateau[ligne][colonne].setIcon(icon);
 	}
-
+ 
 	public void setJoueurCourant(String joueurCourant) {
 		this.joueurCourant.setText(joueurCourant);
 	}
