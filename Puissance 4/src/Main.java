@@ -12,7 +12,6 @@ public class Main {
 			f.setVisible(true);
 			f.setSize(585,730);
 			f.setTitle("Puissance 4");
-			
 	}
 
 }

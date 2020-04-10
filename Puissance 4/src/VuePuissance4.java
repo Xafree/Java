@@ -43,7 +43,7 @@ public class VuePuissance4 extends JPanel{
 		this.add(nord,BorderLayout.NORTH);
 		
 		// création d'un élement centrale 
-		JPanel centre = new JPanel(new GridLayout(7,6));
+		JPanel centre = new JPanel(new GridLayout(7,7));
 		
 		// création du plateau de jeu 
 		this.plateau = new JButtonPlateauPuissance4[LIGNE][COLONNE];
@@ -69,18 +69,18 @@ public class VuePuissance4 extends JPanel{
 		this.add(centre,BorderLayout.CENTER);
 		
 		// création du panel sud (bas de fenetre)
-		JPanel sud = new JPanel(new GridLayout(1,6));
+		JPanel sud = new JPanel(new GridLayout(1,2));
 		
 		//JLabel de création de gagnant
 		this.avancerPartie = new JLabel("Partie en cour !");
 		Icon croix_rouge = new ImageIcon(croisRouge);
-		this.tableauActions[COLONNE]= new JButtonPlateauPuissance4(COLONNE,0);	
+		this.tableauActions[COLONNE]= new JButtonPlateauPuissance4(COLONNE,0);
+		this.tableauActions[COLONNE].setIcon(croix_rouge);
 		this.tableauActions[COLONNE].addActionListener(controler);
 		// Ajout des différents élément dans les Différents panel 
 		sud.add(this.tableauActions[COLONNE]);
 		sud.add(avancerPartie);
-		this.add(sud,BorderLayout.SOUTH);	
-		
+		this.add(sud,BorderLayout.SOUTH);
 	}
 	
 	public void deplacerJetons(int column) {
@@ -94,8 +94,6 @@ public class VuePuissance4 extends JPanel{
 			}
 		}
 	}
-	
-
 	
 	public void setIconPlateau(int ligne, int colonne, Icon icon ){
 		this.plateau[ligne][colonne].setIcon(icon);
